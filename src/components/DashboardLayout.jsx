@@ -71,12 +71,12 @@ const DashboardLayout = () => {
 
             <h2 className="font-bold text-xl mt-2">
               {item.amount < 0
-                ? `-$${Math.abs(
+                ? `-₦${Math.abs(
                     item.amount.toLocaleString("default", {
                       minimumFractionDigits: 2,
                       maximunFractionDigits: 2,
                     }))}`
-                : `$${item.amount.toLocaleString("default", {
+                : `₦${item.amount.toLocaleString("default", {
                   minimumFractionDigits: 2,
                   maximunFractionDigits: 2,
                 })}`}

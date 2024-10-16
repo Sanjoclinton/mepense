@@ -71,7 +71,7 @@ const AllTransactions = () => {
                 <div className="w-1/3 md:w-2/5  flex flex-col md:flex-row text-end  md:text-center md:font-medium">
                   <h3 className="flex-1 font-semibold ">{`${
                     transactionType === "expense" ? "-" : "+"
-                  } $${transactionAmount.toFixed(2)}`}</h3>
+                  } ₦${transactionAmount.toFixed(2)}`}</h3>
                   <p className="flex-1 mt-1 text-xs md:text-base md:mt-0 capitalize">
                     {transactionType}
                   </p>

@@ -62,7 +62,7 @@ const Transactions = ({ transactions, title, height }) => {
                 <div className="w-1/2 text-end flex flex-col md:flex-row md:justify-between md:text-center">
                   <h3 className="flex-1 font-semibold ">{`${
                     transactionType === "expense" ? "-" : "+"
-                  } $${transactionAmount.toLocaleString("default", {
+                  } ₦${transactionAmount.toLocaleString("default", {
                     minimumFractionDigits: 2,
                     maximunFractionDigits: 2,
                   })}`}</h3>
