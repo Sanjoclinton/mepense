@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.login input,
+.reset input,
+.add input {
+  @apply border bg-[#F5F6F7] text-[#BEC2C6] rounded-lg px-4 py-2 outline-none inset-0 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50 transition-colors duration-200 focus:bg-white focus:text-black;
+}
+
+.summary-item::-webkit-scrollbar,
+.recent::-webkit-scrollbar {
+  display: none;
+}
+
+.summary-item,
+.recent {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.custom-height {
+  height: calc(100vh - 466.6px);
+  min-height: calc(100vh - 466.6px);
+}
+
+.settings-custom-height,
+.add-custom-height {
+  height: calc(100vh - 96px);
+  min-height: calc(100vh - 96px);
+}
+
+.all-custom-height {
+  height: calc(100vh - 184px);
+  min-height: calc(100vh - 184px);
+}
+
+.screen {
+  @apply max-w-[600px] mx-auto;
+}
+
+.lower-nav {
+  @apply hover:text-white rounded-full flex items-center justify-center h-12 w-12 hover:bg-blue-600;
+}
