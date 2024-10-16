@@ -22,6 +22,7 @@ import ExpenseTransactions from "./pages/dashboard/ExpenseTransactions";
 import IncomeTransactions from "./pages/dashboard/IncomeTransactions";
 
 import AllTransactions from "./pages/dashboard/AllTransactions";
+import { Error404 } from "./pages/Error404";
 
 const App = () => {
   const router = createBrowserRouter(
@@ -51,6 +52,8 @@ const App = () => {
 
             {/* <Route path="dashboard" element={<Dashboard />} /> */}
           </Route>
+
+          <Route path="*" element={<Error404 />} />
         </Route>
         {/* </Route> */}
       </>
