@@ -90,7 +90,7 @@ const signupPage = () => {
   };
 
   return (
-    <div className="login px-6 py-16 min-h-dvh sm:mx-auto sm:w-[600px]">
+    <div className="login px-6 py-10 min-h-dvh sm:mx-auto sm:w-[600px]">
       {/* BrandName and logo */}
       <div className=" w-full">
         <div className="text-center mb-10">
@@ -159,6 +159,15 @@ const signupPage = () => {
         </div>
 
         <div></div>
+      </div>
+      <div className="text-center mt-auto text-sm">
+        Designed by{" "}
+        <a
+          className="text-[#1c48fc] hover:underline"
+          href="https://www.linkedin.com/in/sanjoclinton/"
+        >
+          @Sanjoclinton
+        </a>
       </div>
     </div>
   );
