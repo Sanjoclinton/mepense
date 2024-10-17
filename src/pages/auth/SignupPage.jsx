@@ -160,10 +160,10 @@ const signupPage = () => {
 
         <div></div>
       </div>
-      <div className="text-center mt-auto text-sm">
+      <div className="text-center text-opacity-70 mt-10 text-xs text-[#1c48fc]">
         Designed by{" "}
         <a
-          className="text-[#1c48fc] hover:underline"
+          className="hover:underline underline-offset-2 text-black"
           href="https://www.linkedin.com/in/sanjoclinton/"
         >
           @Sanjoclinton

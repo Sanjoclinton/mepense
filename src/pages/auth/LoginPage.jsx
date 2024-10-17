@@ -153,7 +153,15 @@ const LoginPage = () => {
 
         <div></div>
       </div>
-     <div className="text-center mt-auto text-sm">Designed by <a className="text-[#1c48fc] hover:underline" href="https://www.linkedin.com/in/sanjoclinton/">@Sanjoclinton</a></div>
+      <div className="text-center text-opacity-70 mt-auto text-xs text-[#1c48fc]">
+        Designed by{" "}
+        <a
+          className="hover:underline underline-offset-2 text-black"
+          href="https://www.linkedin.com/in/sanjoclinton/"
+        >
+          @Sanjoclinton
+        </a>
+      </div>
     </div>
   );
 };
