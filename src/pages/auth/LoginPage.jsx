@@ -153,7 +153,7 @@ const LoginPage = () => {
 
         <div></div>
       </div>
-      <div className="text-center text-opacity-70 mt-auto text-xs text-[#1c48fc]">
+      <div className="text-center text-opacity-70 mt-10 text-xs text-[#1c48fc]">
         Designed by{" "}
         <a
           className="hover:underline underline-offset-2 text-black"
