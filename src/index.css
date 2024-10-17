@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html, body, #root {
+  height: 100%;
+}
+
 .login input,
 .reset input,
 .add input {
@@ -20,19 +24,16 @@
 }
 
 .custom-height {
-  height: calc(100vh - 466.6px);
-  min-height: calc(100vh - 466.6px);
+  height: calc(100dvh - 466.6px);
 }
 
 .settings-custom-height,
 .add-custom-height {
-  height: calc(100vh - 96px);
-  min-height: calc(100vh - 96px);
+  height: calc(100dvh - 96px);
 }
 
 .all-custom-height {
-  height: calc(100vh - 184px);
-  min-height: calc(100vh - 184px);
+  height: calc(100dvh - 184px);
 }
 
 .screen {

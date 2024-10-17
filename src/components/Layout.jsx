@@ -6,7 +6,7 @@ import { IoIosArrowRoundDown, IoIosArrowRoundUp } from "react-icons/io";
 
 const Layout = () => {
   return (
-    <div className="bg-[#f0f1f3] flex flex-col h-screen min-h-[screen]">
+    <div className="bg-[#f0f1f3] flex flex-col h-dvh">
       <Outlet />
       {/* Lower nav */}
       <div className="p-6 flex justify-between items-center  h-[96px] sm:mx-auto sm:w-[600px] ">
