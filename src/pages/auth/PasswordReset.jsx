@@ -24,7 +24,7 @@ const PasswordReset = () => {
   };
 
   return (
-    <div className="login px-6 py-6  min-h-screen sm:mx-auto sm:w-[600px]">
+    <div className="login px-6 py-6  h-dvh sm:mx-auto sm:w-[600px]">
       <Link to="..">
         <button className="w-8 h-8 border-slate-400 border rounded-full flex items-center justify-center">
           <IoChevronBackSharp size={22} />

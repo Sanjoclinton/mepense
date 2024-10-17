@@ -86,7 +86,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="login px-6 py-16 min-h-screen sm:mx-auto sm:w-[600px]">
+    <div className="login px-6 py-16 h-dvh sm:mx-auto sm:w-[600px]">
       {/* BrandName and logo */}
       <div className=" w-full">
         <div className="text-center mb-10">
