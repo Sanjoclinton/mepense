@@ -86,7 +86,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="login px-6 py-16 h-dvh sm:mx-auto sm:w-[600px] flex flex-col">
+    <div className="login px-6 py-16 min-h-dvh sm:mx-auto sm:w-[600px] flex flex-col">
       {/* BrandName and logo */}
       <div className=" w-full">
         <div className="text-center mb-10">
@@ -153,7 +153,7 @@ const LoginPage = () => {
 
         <div></div>
       </div>
-     <div className="text-center mt-auto text-sm">Designed by <a className="text-[#1c48fc] hover:underline" href="https://www.linkedin.com/in/sanjoclinton/">@Sanjoclinton</a></div>
+     <div className="text-center mt-5 text-sm">Designed by <a className="text-[#1c48fc] hover:underline" href="https://www.linkedin.com/in/sanjoclinton/">@Sanjoclinton</a></div>
     </div>
   );
 };
