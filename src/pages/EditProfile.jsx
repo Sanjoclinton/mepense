@@ -23,7 +23,7 @@ export const action = async ({ request }) => {
     // if (email) {
     //   await updateEmail(currentUser, email);
     // }
-    console.log("lol")
+
     return "successful";
   } catch (err) {
     console.log(err.code);

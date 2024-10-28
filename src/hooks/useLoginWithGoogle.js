@@ -8,7 +8,6 @@ export const useLoginWithGoogle = () => {
       await signInWithPopup(auth, googleProvider);
      
     } catch (error) {
-      console.log("Failed to Login");
       console.log(error.code);
       return error.code;
     }

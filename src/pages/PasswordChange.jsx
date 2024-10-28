@@ -25,15 +25,12 @@ const PasswordChange = () => {
     const credential = EmailAuthProvider.credential(user.email, oldPassword);
     try {
       await reauthenticateWithCredential(user, credential);
-      console.log("reauthenticated");
       await updatePassword(user, newPassword);
-      console.log("password updated");
       setMessage("Password Succesfully Changed.");
       setOldPassword("");
       setNewPassword("");
     } catch (err) {
       let errorMessage = err.code;
-      console.log(errorMessage);
       switch (errorMessage) {
         case "auth/invalid-credential":
           errorMessage = "Incorrect password, try again!";

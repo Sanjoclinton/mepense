@@ -32,7 +32,6 @@ export const Settings = () => {
   const { handleOnchange, currency } = useSetCurrency();
 
   const toggleDeleteTop = () => {
-    console.log(showDeletePopUp);
     setShowDeletePopUp((prev) => !prev);
   };
 

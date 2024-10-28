@@ -14,7 +14,7 @@ export const useDeleteUserAccount = () => {
     const credential = EmailAuthProvider.credential(user.email, password);
     try {
       await reauthenticateWithCredential(user, credential);
-      console.log("reauthenticated");
+
       await deleteUser(user);
       navigate("/");
     } catch (err) {

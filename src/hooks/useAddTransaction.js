@@ -15,7 +15,7 @@ export const useAddTransactions = () => {
         transactionTime: serverTimestamp(),
         userID: user.uid,
       });
-      console.log("added"); // Add this line
+
     } catch (error) {
       console.log(error);
     }
