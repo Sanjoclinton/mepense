@@ -54,7 +54,7 @@ export const Settings = () => {
 
   return (
     <div className="settings-custom-height bg-white relative">
-      <div className="p-6 flex items-center justify-between bg-white h-[88px]">
+      <div className="px-6 py-4 flex items-center justify-between bg-white h-[88px]">
         <Link to="/dashboard" className="flex-1 ">
           <button className="w-8 h-8 border-slate-400 border rounded-full flex items-center justify-center">
             <IoChevronBackSharp size={22} />
@@ -85,7 +85,7 @@ export const Settings = () => {
           </div>
         </div>
         {/* Settings content */}
-        <div className="mt-4 sm:mt-8 pt-4 sm:pt-6 flex flex-col gap-2 sm:gap-4 *:py-3 sm:*:py-4 border-t sm:text-lg ">
+        <div className="mt-3 sm:mt-8 pt-4 sm:pt-6 flex flex-col gap-2 sm:gap-4 *:py-2 sm:*:py-4 border-t sm:text-lg ">
           {/* Edit Profile */}
           {showVerificationAlert && (
             <div className="mb-4 p-4 rounded-lg border border-yellow-200 bg-yellow-50 text-yellow-800">

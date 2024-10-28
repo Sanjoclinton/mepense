@@ -49,16 +49,16 @@ const EditProfile = () => {
         <h2 className="flex-1 text-end font-bold text-2xl">mepense</h2>
       </div>
       <div className="max-w-[600px] mx-auto">
-        <div className=" pt-5 flex flex-col items-center justify-center  gap-3">
+        <div className=" pt-4 flex flex-col items-center justify-center  gap-2">
           <img
             src={user.photoURL || "/profile.png"}
             alt="profile picture"
-            className="h-20 w-20 rounded-full border border-slate-600"
+            className="h-16 w-16 rounded-full border border-slate-600"
           />
         </div>
         <Form
           method="post"
-          className="px-6 py-10 edit-profile flex flex-col gap-5 "
+          className="px-6 py-8 edit-profile flex flex-col gap-5 "
         >
           <label
             htmlFor="displayName"
@@ -95,7 +95,7 @@ const EditProfile = () => {
           </label>
           <button
             type="submit"
-            className={`px-4 py-3 mt-5 rounded-lg shadow-slate-400 shadow-lg text-sm  font-semibold ${
+            className={`px-4 py-2 mt-5 rounded-lg shadow-slate-400 shadow-lg text-sm  font-semibold ${
               navigation.state === "submitting"
                 ? "bg-[#747272] text-white/70"
                 : "bg-[#1c41f8] text-white"
