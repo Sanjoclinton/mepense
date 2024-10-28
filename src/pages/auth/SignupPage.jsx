@@ -17,8 +17,9 @@ import {
   signInWithPopup,
   updateProfile,
 } from "firebase/auth";
-import { auth, googleProvider } from "../../config/firebase";
+import { auth } from "../../config/firebase";
 import { useAuthContext } from "../../contexts/AuthContext";
+import { useLoginWithGoogle } from "../../hooks/useLoginWithGoogle";
 
 // Form action
 export const action = async ({ request }) => {
@@ -73,21 +74,13 @@ const signupPage = () => {
   const message = useActionData();
   const navigate = useNavigate();
   const { user } = useAuthContext();
+  const { loginWithGoogle } = useLoginWithGoogle();
 
   useEffect(() => {
     if (user) {
       navigate("/dashboard");
     }
   }, [user]);
-
-  const handleSignInWithGoogle = async () => {
-    try {
-      await signInWithPopup(auth, googleProvider);
-      return navigate("/dashboard");
-    } catch (error) {
-      return error.code;
-    }
-  };
 
   return (
     <div className="login px-6 py-10 min-h-dvh sm:mx-auto sm:w-[600px]">
@@ -144,7 +137,7 @@ const signupPage = () => {
           <p>Or</p>
           <button
             className="font-medium flex items-center justify-center border gap-5 rounded-lg p-4 w-full "
-            onClick={handleSignInWithGoogle}
+            onClick={loginWithGoogle}
           >
             <FcGoogle size={24} />
             CONTINUE WITH GOOGLE

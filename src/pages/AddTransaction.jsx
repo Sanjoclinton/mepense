@@ -1,11 +1,11 @@
 import { addDoc, serverTimestamp } from "firebase/firestore";
-import React, { useEffect, useRef } from "react";
 import { IoChevronBackSharp } from "react-icons/io5";
 import { Form, Link, useActionData, useNavigation } from "react-router-dom";
 import { useAuthContext } from "../contexts/AuthContext";
 
 import { transactionsCollectionRef } from "../config/firebase";
 import { MdOutlineError } from "react-icons/md";
+import { useRef } from "react";
 
 export const action = async ({ request }) => {
   try {
@@ -17,6 +17,7 @@ export const action = async ({ request }) => {
       transactionTime: serverTimestamp(),
       userID: formData.get("userID"),
     });
+
     return "Transaction has been added";
   } catch (error) {
     console.log(error.code);
@@ -25,16 +26,14 @@ export const action = async ({ request }) => {
 };
 
 const AddTransaction = () => {
+  const formRef = useRef(null);
   const { user } = useAuthContext();
   const message = useActionData();
   const navigation = useNavigation();
-  const formRef = useRef(null);
 
-  useEffect(() => {
-    if (message === "Transaction has been added") {
-      formRef?.current.reset();
-    }
-  }, [message]);
+  if (message === "Transaction has been added") {
+    formRef.current.reset();
+  }
 
   return (
     <div className=" flex flex-col bg-white add-custom-height ">

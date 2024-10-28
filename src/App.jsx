@@ -23,6 +23,8 @@ import IncomeTransactions from "./pages/dashboard/IncomeTransactions";
 
 import AllTransactions from "./pages/dashboard/AllTransactions";
 import { Error404 } from "./pages/Error404";
+import PasswordChange from "./pages/passwordChange";
+import EditProfile, { action as editAction } from "./pages/EditProfile";
 
 const App = () => {
   const router = createBrowserRouter(
@@ -47,7 +49,15 @@ const App = () => {
                 element={<AddTransaction />}
                 action={addTransactionAction}
               />
-              <Route path="settings" element={<Settings />} />
+              <Route path="settings">
+                <Route index element={<Settings />} />
+                <Route path="change-password" element={<PasswordChange />} />
+                <Route
+                  path="edit-profile"
+                  element={<EditProfile />}
+                  action={editAction}
+                />
+              </Route>
             </Route>
 
             {/* <Route path="dashboard" element={<Dashboard />} /> */}

@@ -1,28 +1,18 @@
 import React, { useState } from "react";
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { useAuthContext } from "../contexts/AuthContext";
 import { useGetTransactions } from "../hooks/useGetTransactions";
 import { MdOutlineAccountBalanceWallet } from "react-icons/md";
-import { signOut } from "firebase/auth";
-import { auth } from "../config/firebase";
+import { useLogoutUser } from "../hooks/useLogoutUser";
 import { IoIosArrowRoundDown, IoIosArrowRoundUp } from "react-icons/io";
+import { useSetCurrency } from "../hooks/useSetCurrency";
 
 const DashboardLayout = () => {
   const [profileToggle, setProfileToggle] = useState(false);
   const { user } = useAuthContext();
-
+  const { logoutUser } = useLogoutUser();
   const { summary } = useGetTransactions();
-  const navigate = useNavigate();
-
-  const handleLogout = async () => {
-    try {
-      await signOut(auth);
-      navigate("/");
-      return null;
-    } catch (error) {
-      return error.code;
-    }
-  };
+  const { currency } = useSetCurrency();
 
   return (
     <div>
@@ -46,7 +36,7 @@ const DashboardLayout = () => {
             {user.displayName}
           </p>
           <button
-            onClick={handleLogout}
+            onClick={logoutUser}
             className={`text-black/80 font-bold mt-4 border rounded-md py-1 px-3 hover:bg-slate-100 hover:text-black`}
           >
             Logout
@@ -71,15 +61,16 @@ const DashboardLayout = () => {
 
             <h2 className="font-bold text-xl mt-2">
               {item.amount < 0
-                ? `-₦${Math.abs(
+                ? `-${currency}${Math.abs(
                     item.amount.toLocaleString("default", {
                       minimumFractionDigits: 2,
                       maximunFractionDigits: 2,
-                    }))}`
-                : `₦${item.amount.toLocaleString("default", {
-                  minimumFractionDigits: 2,
-                  maximunFractionDigits: 2,
-                })}`}
+                    })
+                  )}`
+                : `${currency}${item.amount.toLocaleString("default", {
+                    minimumFractionDigits: 2,
+                    maximunFractionDigits: 2,
+                  })}`}
             </h2>
           </div>
         ))}

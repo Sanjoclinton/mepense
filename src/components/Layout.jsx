@@ -9,7 +9,7 @@ const Layout = () => {
     <div className="bg-[#f0f1f3] flex flex-col h-dvh">
       <Outlet />
       {/* Lower nav */}
-      <div className="p-6 flex justify-between items-center  h-[96px] sm:mx-auto sm:w-[600px] ">
+      <div className="p-6 flex justify-between items-center h-[96px] sm:mx-auto sm:w-[600px] ">
         <Link to="/dashboard" className=" text-slate-400 lower-nav">
           <CiHome size={30} />
         </Link>

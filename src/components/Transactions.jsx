@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useSetCurrency } from "../hooks/useSetCurrency";
 
 const Transactions = ({ transactions, title, height }) => {
+  const { currency } = useSetCurrency();
   return (
     <div>
       <div className="px-6 pt-6 flex justify-between items-center h-[81.6px] font-mono bg-white">
@@ -62,7 +64,7 @@ const Transactions = ({ transactions, title, height }) => {
                 <div className="w-1/2 text-end flex flex-col md:flex-row md:justify-between md:text-center">
                   <h3 className="flex-1 font-semibold ">{`${
                     transactionType === "expense" ? "-" : "+"
-                  } ₦${transactionAmount.toLocaleString("default", {
+                  } ${currency}${transactionAmount.toLocaleString("default", {
                     minimumFractionDigits: 2,
                     maximunFractionDigits: 2,
                   })}`}</h3>
