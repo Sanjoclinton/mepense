@@ -1,5 +1,4 @@
 import {
-  EmailAuthCredential,
   EmailAuthProvider,
   reauthenticateWithCredential,
   updatePassword,

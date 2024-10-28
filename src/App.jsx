@@ -23,7 +23,7 @@ import IncomeTransactions from "./pages/dashboard/IncomeTransactions";
 
 import AllTransactions from "./pages/dashboard/AllTransactions";
 import { Error404 } from "./pages/Error404";
-import PasswordChange from "./pages/passwordChange";
+import PasswordChange from "./pages/PasswordChange";
 import EditProfile, { action as editAction } from "./pages/EditProfile";
 
 const App = () => {
