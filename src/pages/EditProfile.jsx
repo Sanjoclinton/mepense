@@ -49,11 +49,11 @@ const EditProfile = () => {
         <h2 className="flex-1 text-end font-bold text-2xl">mepense</h2>
       </div>
       <div className="max-w-[600px] mx-auto">
-        <div className=" pt-10 flex flex-col items-center justify-center  gap-3">
+        <div className=" pt-5 flex flex-col items-center justify-center  gap-3">
           <img
             src={user.photoURL || "/profile.png"}
             alt="profile picture"
-            className="h-28 w-28 rounded-full border border-slate-600"
+            className="h-20 w-20 rounded-full border border-slate-600"
           />
         </div>
         <Form
