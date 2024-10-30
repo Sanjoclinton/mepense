@@ -1,10 +1,9 @@
 {
-    "id": "/",
-    "start_url": "/",
-    "scope": "/",
-    "name": "Mepense, the expense tracker for your day to day finance",
-    "short_name": "Mepense",
-    "display": "standalone",
-    "theme_color": "#ffffff"
-  }
-  
+  "id": "/",
+  "start_url": "/",
+  "scope": "/",
+  "name": "Mepense, the expense tracker for your day to day finance",
+  "short_name": "Mepense",
+  "display": "standalone",
+  "theme_color": "#000000"
+}
