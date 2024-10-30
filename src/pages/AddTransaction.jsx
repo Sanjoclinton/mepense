@@ -10,6 +10,7 @@ import { useRef } from "react";
 export const action = async ({ request }) => {
   try {
     const formData = await request.formData();
+    
     await addDoc(transactionsCollectionRef, {
       transactionTitle: formData.get("transactionTitle"),
       transactionAmount: Number(formData.get("transactionAmount")),

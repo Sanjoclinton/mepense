@@ -65,7 +65,6 @@ const PasswordChange = () => {
       </div>
       {/* Shows the successful message that password has been sent  */}
       {message && (
-        // Check if it's an error or success message
         <div
           className={`my-5 w-full rounded-lg gap-1 py-3 px-4 flex items-center justify-center text-xs 
             ${
