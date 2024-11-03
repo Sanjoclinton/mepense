@@ -20,7 +20,7 @@ export default defineConfig({
         display: "standalone",
         theme_color: "#ffffff",
         background_color: "#ffffff",
-
+        display_override: "windows-control-overlay",
         description:
           "The best expense app for tracking your day to day incomes and expenses",
         screenshots: [
