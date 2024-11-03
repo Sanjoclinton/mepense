@@ -10,6 +10,7 @@ const RefreshServiceWorker = () => {
     const updateSW = registerSW({
       onNeedRefresh() {
         setRefresh(true);
+        console.log("here")
       },
 
       onOfflineReady() {},
@@ -22,7 +23,7 @@ const RefreshServiceWorker = () => {
 
   return (
     refresh && (
-      <div className="fixed bottom-4 right-4 z-50 max-w-sm bg-white rounded-lg shadow-lg border border-gray-100 p-4 animate-slide-up">
+      <div className="fixed bottom-4 right-4 z-50 max-w-sm bg-white rounded-lg shadow-lg border border-gray-100 p-4">
         <div className="flex flex-col gap-3">
           <p className="text-gray-700 text-sm font-medium">
             A new version is available
