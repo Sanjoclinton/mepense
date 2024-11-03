@@ -27,6 +27,7 @@ import PasswordChange from "./pages/PasswordChange";
 import EditProfile, { action as editAction } from "./pages/EditProfile";
 
 const App = () => {
+
   const router = createBrowserRouter(
     createRoutesFromElements(
       <>
@@ -37,6 +38,7 @@ const App = () => {
           <Route path="reset-password" element={<PasswordReset />} />
 
           <Route element={<ProtectPages />}>
+    
             <Route element={<Layout />}>
               <Route path="dashboard" element={<DashboardLayout />}>
                 <Route index element={<RecentTransactions />} />
@@ -72,6 +74,7 @@ const App = () => {
   return (
     <AuthProvider>
       <RouterProvider router={router} />
+  
     </AuthProvider>
   );
 };

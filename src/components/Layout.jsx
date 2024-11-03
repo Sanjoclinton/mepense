@@ -3,6 +3,7 @@ import { CiHome, CiSettings } from "react-icons/ci";
 import { IoAdd } from "react-icons/io5";
 import { Link, Outlet } from "react-router-dom";
 import { IoIosArrowRoundDown, IoIosArrowRoundUp } from "react-icons/io";
+import RefreshServiceWorker from "./RefreshServiceWorker";
 
 const Layout = () => {
   return (
@@ -30,6 +31,7 @@ const Layout = () => {
           <CiSettings size={30} />
         </Link>
       </div>
+      <RefreshServiceWorker /> {/* Add it here */}
     </div>
   );
 };
