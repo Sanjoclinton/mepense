@@ -7,10 +7,11 @@ const RefreshServiceWorker = () => {
   const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
+    console.log("Before refresh");
     const updateSW = registerSW({
       onNeedRefresh() {
         setRefresh(true);
-        console.log("here")
+        console.log("here");
       },
 
       onOfflineReady() {},
@@ -18,6 +19,7 @@ const RefreshServiceWorker = () => {
 
     return () => {
       updateSW?.();
+      console.log(updateSW);
     };
   }, []);
 
