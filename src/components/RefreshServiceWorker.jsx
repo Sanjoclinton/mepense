@@ -19,7 +19,6 @@ const RefreshServiceWorker = () => {
 
     return () => {
       updateSW?.();
-      console.log(updateSW);
     };
   }, []);
 
