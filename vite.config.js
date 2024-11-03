@@ -12,46 +12,46 @@ export default defineConfig({
         enabled: true,
       },
       manifest: {
-        "id": "/",
-        "start_url": "/dashboard",
-        "scope": "/",
-        "name": "Mepense, the best expense app for your device",
-        "short_name": "Mepense",
-        "display": "standalone",
-        "theme_color": "#ffffff",
-        "background_color": "#ffffff",
-  
-        "description": "The best expense app for tracking your day to day incomes and expenses",
-        "screenshots": [
+        id: "/",
+        start_url: "/dashboard",
+        scope: "/",
+        name: "Mepense, the best expense app for your device",
+        short_name: "Mepense",
+        display: "standalone",
+        theme_color: "#ffffff",
+        background_color: "#ffffff",
+
+        description:
+          "The best expense app for tracking your day to day incomes and expenses",
+        screenshots: [
           {
-            "src": "screenshots/screenshot.png",
-            "sizes": "1277x994",
-            "type": "image/png",
-            "form_factor": "wide"
+            src: "screenshots/screenshot.png",
+            sizes: "1277x994",
+            type: "image/png",
+            form_factor: "wide",
           },
           {
-            "src": "screenshots/screenshot.png",
-            "sizes": "1277x994",
-            "type": "image/png",
-            "form_factor": "narrow"
-          }
+            src: "screenshots/screenshot.png",
+            sizes: "1277x994",
+            type: "image/png",
+            form_factor: "narrow",
+          },
         ],
-        "icons": [
+        icons: [
           {
-            "src": "icons/icon-512x512.png",
-            "sizes": "512x512",
-            "type": "image/png",
-            "purpose": "maskable"
+            src: "icons/icon-512x512.png",
+            sizes: "512x512",
+            type: "image/png",
+            purpose: "maskable",
           },
           {
-            "src": "icons/icon-512x512.png",
-            "sizes": "512x512",
-            "type": "image/png",
-          }
-        ]
-      }
-      
-      
+            src: "icons/icon-512x512.png",
+            sizes: "512x512",
+            type: "image/png",
+            purpose: "any",
+          },
+        ],
+      },
     }),
   ],
 });
