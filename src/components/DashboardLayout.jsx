@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { Outlet } from "react-router-dom";
 import { useAuthContext } from "../contexts/AuthContext";
 import { useGetTransactions } from "../hooks/useGetTransactions";
@@ -13,6 +13,8 @@ const DashboardLayout = () => {
   const { logoutUser } = useLogoutUser();
   const { summary } = useGetTransactions();
   const { currency } = useSetCurrency();
+
+  const memoizedSummary = useMemo(() => summary, [summary]);
 
   return (
     <div>
@@ -45,7 +47,7 @@ const DashboardLayout = () => {
       </div>
       {/* Summary: Balances, expense & income */}
       <div className="summary-item px-6 py-10 flex gap-3 justify-between md:justify-start flex-nowrap overflow-scroll h-[201px]">
-        {summary.map((item, index) => (
+        {memoizedSummary.length !== 0 && memoizedSummary.map((item, index) => (
           <div
             key={item.id}
             className={`p-6 flex-1 lg:flex-[0] rounded-xl min-w-fit lg:min-w-56 flex flex-col gap-3 ${
