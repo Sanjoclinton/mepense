@@ -48,11 +48,14 @@ const Transactions = ({ transactions, title }) => {
               transactionTime,
               transactionType,
             }) => {
-              const longTime = transactionTime.toDate();
-              const shortTime = `${longTime.getDate()} ${longTime.toLocaleString(
-                "en-us",
-                { month: "short" }
-              )} ${longTime.getFullYear()}`;
+              const longTime = transactionTime
+                ? transactionTime.toDate()
+                : null;
+              const shortTime = longTime
+                ? `${longTime.getDate()} ${longTime.toLocaleString("en-us", {
+                    month: "short",
+                  })} ${longTime.getFullYear()}`
+                : null;
 
               return (
                 <article key={id} className="flex justify-between w-full">
@@ -65,23 +68,30 @@ const Transactions = ({ transactions, title }) => {
                   <div className="w-1/2 text-end flex flex-col md:flex-row md:justify-between md:text-center">
                     <h3
                       className={`flex-1 font-semibold ${
-                        transactionType === "expense" ? "text-red-600" : "text-green-600"
+                        transactionType === "expense"
+                          ? "text-red-600"
+                          : "text-green-600"
                       }`}
                     >
                       {`${
                         transactionType === "expense" ? "-" : "+"
-                      } ${currency}${transactionAmount.toLocaleString("default", {
-                        minimumFractionDigits: 2,
-                        maximumFractionDigits: 2,
-                      })}`}
+                      } ${currency}${transactionAmount.toLocaleString(
+                        "default",
+                        {
+                          minimumFractionDigits: 2,
+                          maximumFractionDigits: 2,
+                        }
+                      )}`}
                     </h3>
                     <p className="flex-1 mt-1 text-xs md:text-base md:font-medium md:mt-0 capitalize">
                       {transactionType}
                     </p>
                   </div>
-                  <p className="w-1/4 text-xs hidden md:flex md:items-center md:justify-end md:text-base">
-                    {longTime.toLocaleTimeString()}, {shortTime}
-                  </p>
+                  {transactionTime && (
+                    <p className="w-1/4 text-xs hidden md:flex md:items-center md:justify-end md:text-base">
+                      {longTime.toLocaleTimeString()}, {shortTime}
+                    </p>
+                  )}
                 </article>
               );
             }

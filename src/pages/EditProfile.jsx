@@ -9,13 +9,12 @@ export const action = async ({ request }) => {
   const formData = await request.formData();
   const currentUser = getAuth().currentUser;
 
-  const action = formData.get("actionType");
+  const actionType = formData.get("actionType");
 
   const name = formData.get("displayName");
   const number = formData.get("phoneNumber");
   const email = formData.get("email");
-  
-  console.log(action);
+
 
   try {
     if (name) {
@@ -30,7 +29,7 @@ export const action = async ({ request }) => {
 
     return "successful";
   } catch (err) {
-    console.log(err.code);
+  
     return "failed";
   }
 };
