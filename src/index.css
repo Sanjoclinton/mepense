@@ -37,15 +37,12 @@ select,
   height: calc(100vh - 466px);
 }
 
-.dashboard-custom-height,
-.settings-custom-height,
-.add-custom-height,
-.edit-profile-height {
-  height: calc(100vh - 96px);
+.layout-outlet-custom-height {
+  height: calc(100dvh - 96px);
 }
 
 .all-custom-height {
-  height: calc(100vh - 184px);
+  height: calc(100dvh - 184px);
 }
 
 .screen {
@@ -70,7 +67,6 @@ select,
 .settings-container {
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 96px);
   overflow: hidden;
 }
 
