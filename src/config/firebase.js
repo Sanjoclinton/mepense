@@ -1,7 +1,13 @@
 import { initializeApp } from "firebase/app";
 
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
-import { collection, getFirestore } from "firebase/firestore";
+import {
+  collection,
+  getFirestore,
+  initializeFirestore,
+  persistentLocalCache,
+  persistentMultipleTabManager,
+} from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -18,7 +24,11 @@ export const auth = getAuth(app);
 
 export const googleProvider = new GoogleAuthProvider();
 
-export const db = getFirestore(app);
+export const db = initializeFirestore(app, {
+  localCache: persistentLocalCache(
+    /*settings*/ { tabManager: persistentMultipleTabManager() }
+  ),
+});
 
 export const transactionsCollectionRef = collection(db, "transactions");
 // firebase login
