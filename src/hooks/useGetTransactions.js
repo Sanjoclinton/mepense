@@ -6,9 +6,9 @@ import { useAuthContext } from "../contexts/AuthContext";
 export const useGetTransactions = (props) => {
   const [transactions, setTransactions] = useState([]);
   const [summary, setSummary] = useState([
-    { id: 1, title: "Balance", amount: 0 },
-    { id: 2, title: "Income", amount: 0 },
-    { id: 3, title: "expense", amount: 0 },
+    { id: 1, title: "Balance", amount: "" },
+    { id: 2, title: "Income", amount: "" },
+    { id: 3, title: "expense", amount: "" },
   ]);
   const { user } = useAuthContext();
 

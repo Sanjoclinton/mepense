@@ -31,7 +31,7 @@ const Layout = () => {
           <CiSettings size={30} />
         </Link>
       </div>
-      <RefreshServiceWorker /> {/* Add it here */}
+      <RefreshServiceWorker />
     </div>
   );
 };
