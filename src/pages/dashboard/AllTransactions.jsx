@@ -16,7 +16,7 @@ const AllTransactions = () => {
   };
 
   return (
-    <div>
+    <div className="layout-outlet-custom-height flex flex-col">
       <header className="p-6 flex items-center bg-white shadow-md h-[88px]">
         <Link to="/dashboard">
           <button
@@ -26,14 +26,15 @@ const AllTransactions = () => {
             <IoChevronBackSharp size={22} />
           </button>
         </Link>
-        <h3 className="text-lg font-semibold mx-auto text-gray-800">All Transactions</h3>
+        <h3 className="text-lg font-semibold mx-auto text-gray-800">
+          All Transactions
+        </h3>
       </header>
 
       <main
-        className="recent flex flex-col p-6 gap-6 overflow-scroll bg-white all-custom-height shadow-inner"
+        className="recent flex-1 flex flex-col p-6 gap-6 overflow-scroll bg-white shadow-inner"
         aria-live="polite"
       >
-        {/* Table Header */}
         <div className="hidden md:flex justify-between w-full font-mono text-black/70 border-b-2 pb-2">
           <div className="w-1/5">
             <h3 className="capitalize font-medium">Transaction Title</h3>
@@ -69,7 +70,10 @@ const AllTransactions = () => {
               )} ${longTime.getFullYear()}`;
 
               return (
-                <article key={id} className="flex justify-between w-full border-b py-4">
+                <article
+                  key={id}
+                  className="flex justify-between w-full border-b py-4"
+                >
                   <div className="w-1/3 md:w-1/5">
                     <h3 className="font-semibold capitalize text-gray-800">
                       {transactionTitle.toLowerCase()}
@@ -77,11 +81,22 @@ const AllTransactions = () => {
                     <p className="mt-1 text-xs block md:hidden">{shortTime}</p>
                   </div>
                   <div className="w-1/3 md:w-2/5 flex flex-col md:flex-row text-end md:text-center md:font-medium">
-                    <h3 className={`flex-1 font-semibold ${transactionType === "expense" ? "text-red-600" : "text-green-600"}`}>
-                      {`${transactionType === "expense" ? "-" : "+"} ${currency}${transactionAmount.toLocaleString("default", {
-                        minimumFractionDigits: 2,
-                        maximumFractionDigits: 2,
-                      })}`}
+                    <h3
+                      className={`flex-1 font-semibold ${
+                        transactionType === "expense"
+                          ? "text-red-600"
+                          : "text-green-600"
+                      }`}
+                    >
+                      {`${
+                        transactionType === "expense" ? "-" : "+"
+                      } ${currency}${transactionAmount.toLocaleString(
+                        "default",
+                        {
+                          minimumFractionDigits: 2,
+                          maximumFractionDigits: 2,
+                        }
+                      )}`}
                     </h3>
                     <p className="flex-1 mt-1 text-xs md:text-base md:mt-0 capitalize">
                       {transactionType}

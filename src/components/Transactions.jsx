@@ -2,11 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useSetCurrency } from "../hooks/useSetCurrency";
 
-const Transactions = ({ transactions, title, height }) => {
+const Transactions = ({ transactions, title }) => {
   const { currency } = useSetCurrency();
 
   return (
-    <section>
+    <section className="flex flex-col h-full">
       {/* Header for Transactions */}
       <header className="px-6 pt-6 flex justify-between items-center h-[81.6px] font-mono bg-white">
         <h3 className="font-semibold">{title}</h3>
@@ -20,7 +20,7 @@ const Transactions = ({ transactions, title, height }) => {
 
       {/* Transactions List */}
       <div
-        className={`recent flex flex-col p-6 gap-6 overflow-scroll bg-white ${height || "custom-height"}`}
+        className={`recent flex-1 flex flex-col p-6 gap-6 overflow-scroll bg-white`}
         aria-live="polite"
       >
         {/* Show only 5 transactions */}

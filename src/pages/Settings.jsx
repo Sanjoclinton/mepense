@@ -49,7 +49,7 @@ export const Settings = () => {
   };
 
   return (
-    <div className="settings-container bg-white relative">
+    <div className="settings-container layout-outlet-custom-height bg-white relative">
       <div className="px-6 py-4 flex items-center justify-between bg-white h-[88px]">
         <Link to="/dashboard" className="flex-1">
           <button className="w-8 h-8 border-slate-400 border rounded-full flex items-center justify-center">

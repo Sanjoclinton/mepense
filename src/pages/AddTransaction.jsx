@@ -43,7 +43,7 @@ const AddTransaction = () => {
   }
 
   return (
-    <div className=" flex flex-col bg-white add-custom-height ">
+    <div className=" flex flex-col bg-white layout-outlet-custom-height ">
       <div className="p-6 flex items-center bg-white h-[88px]">
         <Link to="/dashboard">
           <button className="w-8 h-8 border-slate-400 border rounded-full flex items-center justify-center">
@@ -57,7 +57,7 @@ const AddTransaction = () => {
       <Form
         ref={formRef}
         method="post"
-        className="add flex flex-col gap-8 px-6 py-10 text-black/75 sm:w-[600px] sm:mx-auto"
+        className="add flex-1 overflow-y-auto no-scrollbar flex flex-col gap-8 px-6 py-10 text-black/75 sm:w-[600px] sm:mx-auto"
       >
         {message && (
           <div className=" w-full rounded-lg gap-1 py-3 px-4 flex items-center justify-center text-xs bg-green-200 text-green-600">

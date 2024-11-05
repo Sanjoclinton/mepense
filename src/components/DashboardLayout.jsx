@@ -18,7 +18,7 @@ const DashboardLayout = () => {
   if (!summary.length) return null;
 
   return (
-    <div className="dashboard-custom-height flex flex-col">
+    <div className="layout-outlet-custom-height flex flex-col">
       {/* Overview and Profile Section */}
       <header className="p-6 flex items-center justify-between bg-white h-[88px] relative">
         <h3 className="text-lg font-semibold">Overview</h3>
