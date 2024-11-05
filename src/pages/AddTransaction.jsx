@@ -7,10 +7,12 @@ import { transactionsCollectionRef } from "../config/firebase";
 import { MdOutlineError } from "react-icons/md";
 import { useRef } from "react";
 
+import { useSetUserCurrency } from "../assets/hooks_new/useSetUserCurrency";
+
 export const action = async ({ request }) => {
   try {
     const formData = await request.formData();
-    
+
     await addDoc(transactionsCollectionRef, {
       transactionTitle: formData.get("transactionTitle"),
       transactionAmount: Number(formData.get("transactionAmount")),
@@ -32,6 +34,10 @@ const AddTransaction = () => {
   const message = useActionData();
   const navigation = useNavigation();
 
+  const { defaultCurrency } = useSetUserCurrency();
+  console.log(defaultCurrency);
+  console.log("local", localStorage.getItem("currency"))
+
   if (message === "Transaction has been added") {
     formRef.current.reset();
   }
@@ -44,8 +50,8 @@ const AddTransaction = () => {
             <IoChevronBackSharp size={22} />
           </button>
         </Link>
-        <h3 className="text-lg font-semibold mx-auto">Add Transaction</h3>
-        <h2 className="font-bold text-2xl">mepense</h2>
+        <h3 className=" font-semibold mx-auto">Add Transaction</h3>
+        <h2 className="font-bold text-lg">mepense</h2> 
       </div>
 
       <Form

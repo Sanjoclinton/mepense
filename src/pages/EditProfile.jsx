@@ -43,10 +43,10 @@ const EditProfile = () => {
             <IoChevronBackSharp size={22} />
           </button>
         </Link>
-        <h3 className="flex-1 text-center text-lg font-semibold">
+        <h3 className="flex-1 text-center font-semibold">
           Edit Profile
         </h3>
-        <h2 className="flex-1 text-end font-bold text-2xl">mepense</h2>
+        <h2 className="flex-1 text-end font-bold text-lg">mepense</h2> 
       </div>
       <div className="max-w-[600px] mx-auto">
         <div className=" pt-4 flex flex-col items-center justify-center  gap-2">

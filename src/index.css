@@ -8,38 +8,43 @@ body,
   height: 100%;
 }
 
+.input-style {
+  @apply border bg-[#F5F6F7] text-[#BEC2C6] rounded-lg px-4 py-2 outline-none transition-colors duration-200;
+}
+
 select,
 .login input,
 .reset input,
 .add input,
 .delete input,
 .edit-profile input {
-  @apply border bg-[#F5F6F7] text-[#BEC2C6] rounded-lg px-4 py-2 outline-none inset-0 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50 transition-colors duration-200 focus:bg-white focus:text-black;
+  @apply input-style;
 }
 
-.summary-item::-webkit-scrollbar,
-.recent::-webkit-scrollbar {
+.input-style:focus {
+  @apply border-blue-500 ring-2 ring-blue-500/50 bg-white text-black;
+}
+
+.no-scrollbar::-webkit-scrollbar {
   display: none;
 }
-
-.summary-item,
-.recent {
+.no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
 
 .custom-height {
-  height: calc(100dvh - 466.6px);
+  height: calc(100vh - 466px);
 }
 
 .settings-custom-height,
 .add-custom-height,
 .edit-profile-height {
-  height: calc(100dvh - 96px);
+  height: calc(100vh - 96px);
 }
 
 .all-custom-height {
-  height: calc(100dvh - 184px);
+  height: calc(100vh - 184px);
 }
 
 .screen {
@@ -47,5 +52,29 @@ select,
 }
 
 .lower-nav {
-  @apply hover:text-white rounded-full flex items-center justify-center h-12 w-12 hover:bg-blue-600;
+  @apply flex items-center justify-center h-12 w-12 rounded-full transition-colors duration-200;
+}
+
+/* .lower-nav:hover {
+  @apply bg-gray-300;
+} */
+
+.bg-light-gray {
+  @apply bg-[#F5F6F7];
+}
+.text-gray-light {
+  @apply text-[#BEC2C6];
+}
+
+.settings-container {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 96px);
+  overflow: hidden;
+}
+
+.settings-scrollable {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem;
 }

@@ -8,7 +8,6 @@ import {
 import LoginPage, { action as signinAction } from "./pages/auth/LoginPage";
 import SignupPage, { action as signupAction } from "./pages/auth/SignupPage";
 import ProtectPages from "./pages/ProtectPages";
-import { AuthProvider } from "./contexts/AuthContext";
 
 import PasswordReset from "./pages/auth/PasswordReset";
 import AddTransaction, {
@@ -25,9 +24,11 @@ import AllTransactions from "./pages/dashboard/AllTransactions";
 import { Error404 } from "./pages/Error404";
 import PasswordChange from "./pages/PasswordChange";
 import EditProfile, { action as editAction } from "./pages/EditProfile";
+import { AuthProvider } from "./contexts/AuthContext";
+
 
 const App = () => {
-
+  
   const router = createBrowserRouter(
     createRoutesFromElements(
       <>
@@ -38,7 +39,6 @@ const App = () => {
           <Route path="reset-password" element={<PasswordReset />} />
 
           <Route element={<ProtectPages />}>
-    
             <Route element={<Layout />}>
               <Route path="dashboard" element={<DashboardLayout />}>
                 <Route index element={<RecentTransactions />} />
@@ -74,7 +74,6 @@ const App = () => {
   return (
     <AuthProvider>
       <RouterProvider router={router} />
-  
     </AuthProvider>
   );
 };
