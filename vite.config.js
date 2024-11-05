@@ -11,7 +11,6 @@ export default defineConfig({
       workbox: {
         globPatterns: ["**/*.{js,css,html,ico,png,svg}"],
       },
-
       manifest: {
         id: "/",
         start_url: "/dashboard",

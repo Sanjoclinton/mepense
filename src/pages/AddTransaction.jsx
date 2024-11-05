@@ -12,7 +12,6 @@ import { useSetUserCurrency } from "../assets/hooks_new/useSetUserCurrency";
 export const action = async ({ request }) => {
   try {
     const formData = await request.formData();
-
     await addDoc(transactionsCollectionRef, {
       transactionTitle: formData.get("transactionTitle"),
       transactionAmount: Number(formData.get("transactionAmount")),
@@ -23,7 +22,6 @@ export const action = async ({ request }) => {
 
     return "Transaction has been added";
   } catch (error) {
-    console.log(error.code);
     return error.code;
   }
 };
@@ -35,8 +33,6 @@ const AddTransaction = () => {
   const navigation = useNavigation();
 
   const { defaultCurrency } = useSetUserCurrency();
-  console.log(defaultCurrency);
-  console.log("local", localStorage.getItem("currency"))
 
   if (message === "Transaction has been added") {
     formRef.current.reset();
