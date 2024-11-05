@@ -18,11 +18,11 @@ const DashboardLayout = () => {
   if (!summary.length) return null;
 
   return (
-    <div>
+    <div className="dashboard-custom-height flex flex-col">
       {/* Overview and Profile Section */}
       <header className="p-6 flex items-center justify-between bg-white h-[88px] relative">
         <h3 className="text-lg font-semibold">Overview</h3>
-        <h2 className="font-bold text-lg">mepense</h2> 
+        <h2 className="font-bold text-lg">mepense</h2>
         <button
           onClick={() => setProfileToggle((prev) => !prev)}
           aria-expanded={profileToggle}
@@ -38,7 +38,9 @@ const DashboardLayout = () => {
         {/* Profile Dropdown */}
         {profileToggle && (
           <div className="absolute right-6 -bottom-20 px-5 py-4 min-w-44 bg-[#f0f1f3] text-sm shadow-black/20 shadow-md rounded-xl border text-left">
-            <p className="capitalize font-medium text-black/60">{user.displayName}</p>
+            <p className="capitalize font-medium text-black/60">
+              {user.displayName}
+            </p>
             <button
               onClick={logoutUser}
               className="text-white bg-red-600 font-bold mt-4 border rounded-md py-1 px-3 hover:bg-red-700 transition-colors duration-200"
@@ -52,14 +54,14 @@ const DashboardLayout = () => {
       {/* Summary Section: Balances, Expense & Income */}
       <section className="summary-item px-6 py-10 flex gap-3 justify-between md:justify-start flex-nowrap overflow-scroll h-[201px] no-scrollbar">
         {summary.map((item, index) => {
-          let bgColor = "bg-white"; 
-          
+          let bgColor = "bg-white";
+
           if (item.title === "Expense") {
             bgColor = "bg-red-600 text-white";
           } else if (item.title === "Income") {
-            bgColor = "bg-green-600 text-white"; 
+            bgColor = "bg-green-600 text-white";
           } else if (item.title === "Balance") {
-            bgColor = "bg-blue-600 text-white"; 
+            bgColor = "bg-blue-600 text-white";
           }
 
           return (
@@ -76,10 +78,13 @@ const DashboardLayout = () => {
 
               <h2 className="font-bold text-xl mt-2">
                 {item.amount < 0
-                  ? `-${currency}${Math.abs(item.amount).toLocaleString("default", {
-                      minimumFractionDigits: 2,
-                      maximumFractionDigits: 2,
-                    })}`
+                  ? `-${currency}${Math.abs(item.amount).toLocaleString(
+                      "default",
+                      {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      }
+                    )}`
                   : `${currency}${item.amount.toLocaleString("default", {
                       minimumFractionDigits: 2,
                       maximumFractionDigits: 2,
@@ -90,7 +95,9 @@ const DashboardLayout = () => {
         })}
       </section>
 
-      <Outlet />
+      <section className="flex-1 overflow-hidden">
+        <Outlet />
+      </section>
     </div>
   );
 };

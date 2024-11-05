@@ -37,6 +37,7 @@ select,
   height: calc(100vh - 466px);
 }
 
+.dashboard-custom-height,
 .settings-custom-height,
 .add-custom-height,
 .edit-profile-height {
