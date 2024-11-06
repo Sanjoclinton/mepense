@@ -1,7 +1,7 @@
 import React from "react";
 import { CiHome, CiSettings } from "react-icons/ci";
 import { IoAdd } from "react-icons/io5";
-import { Link, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 import { IoIosArrowRoundDown, IoIosArrowRoundUp } from "react-icons/io";
 import RefreshServiceWorker from "./RefreshServiceWorker";
 
@@ -11,12 +11,12 @@ const Layout = () => {
       <Outlet />
       {/* Lower nav */}
       <div className="p-6 flex justify-between items-center h-[96px] sm:mx-auto sm:w-[600px] ">
-        <Link to="/dashboard" className=" text-slate-400 lower-nav">
+        <NavLink end to="/dashboard" className={({isActive})=> ( isActive ? " text-slate-600 hover:text-slate-600 lower-nav" : "text-slate-400 hover:text-slate-600 lower-nav")}>
           <CiHome size={30} />
-        </Link>
-        <Link to="/dashboard/expenses" className=" text-slate-400 lower-nav">
+        </NavLink>
+        <NavLink to="/dashboard/expenses" className={({isActive})=> ( isActive ? " text-slate-600 hover:text-slate-600 lower-nav" : "text-slate-400 hover:text-slate-600 lower-nav")}>
           <IoIosArrowRoundUp size={30} />
-        </Link>
+        </NavLink>
 
         <Link
           to="/add-transaction"
@@ -24,12 +24,12 @@ const Layout = () => {
         >
           <IoAdd size={40} />
         </Link>
-        <Link to="/dashboard/incomes" className=" text-slate-400 lower-nav">
+        <NavLink to="/dashboard/incomes" className={({isActive})=> (isActive ? " text-slate-600 hover:text-slate-600 lower-nav" : "text-slate-400 hover:text-slate-600 lower-nav")}>
           <IoIosArrowRoundDown size={30} />
-        </Link>
-        <Link to="settings" className=" text-slate-400 lower-nav">
+        </NavLink>
+        <NavLink to="settings" className={({isActive})=> (isActive ? " text-slate-600 hover:text-slate-600 lower-nav" : "text-slate-400 hover:text-slate-600 lower-nav")}>
           <CiSettings size={30} />
-        </Link>
+        </NavLink>
       </div>
       <RefreshServiceWorker />
     </div>

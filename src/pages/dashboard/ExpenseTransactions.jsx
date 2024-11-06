@@ -1,11 +1,11 @@
 import React from "react";
-import { useGetTransactions } from "../../hooks/useGetTransactions";
 import { where } from "firebase/firestore";
 import Transactions from "../../components/Transactions";
+import { useGetUserTransactions } from "../../hooks/useGetUserTransactions";
 
 const ExpenseTransactions = () => {
   const addConstraints = [where("transactionType", "==", "expense")];
-  const { transactions } = useGetTransactions(addConstraints);
+  const { transactions } = useGetUserTransactions(addConstraints);
 
   return (
     <>

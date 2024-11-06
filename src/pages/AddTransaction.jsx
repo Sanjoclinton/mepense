@@ -1,28 +1,67 @@
-import { addDoc, serverTimestamp } from "firebase/firestore";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { IoChevronBackSharp } from "react-icons/io5";
 import { Form, Link, useActionData, useNavigation } from "react-router-dom";
 import { useAuthContext } from "../contexts/AuthContext";
 
-import { transactionsCollectionRef } from "../config/firebase";
+import { transactionsCollectionRef, db, auth } from "../config/firebase";
 import { MdOutlineError } from "react-icons/md";
 import { useRef } from "react";
-
-import { useSetUserCurrency } from "../assets/hooks_new/useSetUserCurrency";
+import { useSetUserCurrency } from "../hooks/useSetUserCurrency";
 
 export const action = async ({ request }) => {
+  const formData = await request.formData();
+  const userId = auth.currentUser.uid;
+
+  const usersTransactionCollectionRef = collection(
+    db,
+    "users",
+    userId,
+    "transactions"
+  );
+
+  const title = formData.get("transactionTitle")?.trim();
+  const amount = formData.get("transactionAmount");
+  const type = formData.get("transactionType");
+  const userID = formData.get("userID");
+
+  if (!title || !amount || !type || !userID) {
+    return { error: "All fields are required" };
+  }
+
+  const titleRegex = /^(\s?[a-zA-Z0-9]{2,10}){1,4}$/;
+  if (!titleRegex.test(title)) {
+    return {
+      error:
+        "Title must be 1-4 words, each 2-10 characters long, containing only letters and numbers",
+    };
+  }
+
+  // Validate amount is a valid number
+  const numAmount = Number(amount);
+  if (isNaN(numAmount) || numAmount <= 0) {
+    return { error: "Amount must be a valid positive number" };
+  }
+
+  const validTypes = ["income", "expense"];
+  if (!validTypes.includes(type)) {
+    return { error: "Invalid transaction type" };
+  }
+
   try {
-    const formData = await request.formData();
-    await addDoc(transactionsCollectionRef, {
-      transactionTitle: formData.get("transactionTitle"),
-      transactionAmount: Number(formData.get("transactionAmount")),
-      transactionType: formData.get("transactionType"),
+    await addDoc(usersTransactionCollectionRef, {
+      transactionTitle: title,
+      transactionAmount: numAmount,
+      transactionType: type,
       transactionTime: serverTimestamp(),
-      userID: formData.get("userID"),
+      userID: userID,
     });
 
-    return "Transaction has been added";
+    return { success: "Transaction has been added successfully" };
   } catch (error) {
-    return error.code;
+    console.error("Error adding transaction:", error);
+    return {
+      error: "Failed to add transaction. Please try again later.",
+    };
   }
 };
 
@@ -32,9 +71,9 @@ const AddTransaction = () => {
   const message = useActionData();
   const navigation = useNavigation();
 
-  const { defaultCurrency } = useSetUserCurrency();
+  const { currency } = useSetUserCurrency();
 
-  if (message === "Transaction has been added") {
+  if (message) {
     formRef.current.reset();
   }
 
@@ -47,7 +86,7 @@ const AddTransaction = () => {
           </button>
         </Link>
         <h3 className=" font-semibold mx-auto">Add Transaction</h3>
-        <h2 className="font-bold text-lg">mepense</h2> 
+        <h2 className="font-bold text-lg">mepense</h2>
       </div>
 
       <Form
@@ -56,15 +95,24 @@ const AddTransaction = () => {
         className="add flex-1 overflow-y-auto no-scrollbar flex flex-col gap-8 px-6 py-10 text-black/75 sm:w-[600px] sm:mx-auto"
       >
         {message && (
-          <div className=" w-full rounded-lg gap-1 py-3 px-4 flex items-center justify-center text-xs bg-green-200 text-green-600">
+          <div
+            className={`w-full rounded-lg gap-1 py-3 px-4 flex items-center justify-center text-xs ${
+              message.success
+                ? "bg-green-200 text-green-600"
+                : message.error
+                ? "bg-red-200 text-red-600"
+                : ""
+            }`}
+          >
             <MdOutlineError size={20} />
-            <p> {message}</p>
+            <p> {message.success || message.error}</p>
           </div>
         )}
         <div className="flex flex-col gap-2">
           <label htmlFor="transactionTitle">Transaction Title</label>
           <input
             type="text"
+            pattern="^(\s?[a-zA-Z0-9]{2,10}){1,4}$"
             name="transactionTitle"
             id="transactionTitle"
             placeholder="e.g Food, transportation"
@@ -84,7 +132,7 @@ const AddTransaction = () => {
               className="w-full"
               required
             />
-            <p className="absolute right-3 font-bold opacity-55">$</p>
+            <p className="absolute right-3 font-bold opacity-55">{currency}</p>
           </div>
         </div>
         <div className="flex flex-col gap-4">
