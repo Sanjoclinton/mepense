@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { useAuthContext } from "../contexts/AuthContext";
 
-import { MdOutlineAccountBalanceWallet } from "react-icons/md";
+import { Wallet } from 'lucide-react';
 import { useLogoutUser } from "../hooks/useLogoutUser";
 import { IoIosArrowRoundDown, IoIosArrowRoundUp } from "react-icons/io";
 import { useSetUserCurrency } from "../hooks/useSetUserCurrency";
@@ -73,8 +73,9 @@ const DashboardLayout = () => {
               key={item.id}
               className={`p-6 flex-1 lg:flex-[0] rounded-xl min-w-fit lg:min-w-56 flex flex-col gap-3 ${bgColor} transition-shadow duration-200 hover:shadow-lg`}
             >
-              <MdOutlineAccountBalanceWallet size={24} />
+              
               <div className="flex items-center gap-2">
+              <Wallet size={22} />
                 <p className="text-xs">Total {item.title}</p>
                 {item.title === "Expense" && <IoIosArrowRoundUp size={15} />}
                 {item.title === "Income" && <IoIosArrowRoundDown size={15} />}
