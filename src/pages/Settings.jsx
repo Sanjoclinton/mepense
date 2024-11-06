@@ -14,7 +14,7 @@ import { BsCurrencyExchange, BsEye, BsEyeSlash } from "react-icons/bs";
 import { useAuthContext } from "../contexts/AuthContext";
 import { useLogoutUser } from "../hooks/useLogoutUser";
 import { IoClose } from "react-icons/io5";
-import { useSetUserCurrency } from "../assets/hooks_new/useSetUserCurrency";
+import { useSetUserCurrency } from "../hooks/useSetUserCurrency";
 import { useDeleteUserAccount } from "../hooks/useDeleteUserAccount";
 
 export const Settings = () => {
@@ -57,7 +57,7 @@ export const Settings = () => {
           </button>
         </Link>
         <h3 className="flex-1 text-center text-base font-semibold">Settings</h3>
-        <h2 className="flex-1 text-end font-bold text-lg">mepense</h2> 
+        <h2 className="flex-1 text-end font-bold text-lg">mepense</h2>
       </div>
       <div className="settings-scrollable">
         {/* Profile goes in here */}
@@ -171,7 +171,10 @@ export const Settings = () => {
         {showDeletePopUp && (
           <div className="w-4/5 max-w-[500px] flex flex-col gap-3 p-6 absolute top-1/2 right-1/2 translate-x-1/2 -translate-y-1/4 border rounded-xl bg-white shadow-xl shadow-black/20 delete z-10">
             <div>
-              <IoClose onClick={toggleDeleteTop} className="ml-auto cursor-pointer" />
+              <IoClose
+                onClick={toggleDeleteTop}
+                className="ml-auto cursor-pointer"
+              />
               {deleteErrorMessage && (
                 <div className="my-5 rounded-lg gap-1 py-3 px-4 flex items-center justify-center text-xs bg-[#ffd7d7] text-[#ef4e4e]">
                   <MdOutlineError size={20} />
@@ -182,7 +185,11 @@ export const Settings = () => {
             <p className="text-font-medium text-slate-500">
               Enter your password to confirm account delete
             </p>
-            <form method="post" className="flex flex-col gap-5" onSubmit={handleDeleteUser}>
+            <form
+              method="post"
+              className="flex flex-col gap-5"
+              onSubmit={handleDeleteUser}
+            >
               <div className="relative flex flex-col justify-center">
                 <input
                   type={passwordVisible ? "text" : "password"}

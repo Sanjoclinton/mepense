@@ -1,38 +1,37 @@
-import { onSnapshot, orderBy, query, where } from "firebase/firestore";
-import { useEffect, useState } from "react";
-import { transactionsCollectionRef } from "../config/firebase";
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import { db } from "../config/firebase";
 import { useAuthContext } from "../contexts/AuthContext";
+import { useEffect, useState } from "react";
 
-export const useGetTransactions = (props) => {
-  const [transactions, setTransactions] = useState([]);
+export const useGetUserTransactions = (props = []) => {
   const [summary, setSummary] = useState([
     { id: 1, title: "Balance", amount: "" },
     { id: 2, title: "Income", amount: "" },
     { id: 3, title: "expense", amount: "" },
   ]);
+
+  const [transactions, setTransactions] = useState([]);
   const { user } = useAuthContext();
+  const userId = user.uid;
 
-  const queryConstraints = [
-    where("userID", "==", user.uid),
+  const userTransactionsCollectionRef = collection(
+    db,
+    "users",
+    userId,
+    "transactions"
+  );
+  const querySnapShot = query(
+    userTransactionsCollectionRef,
     orderBy("transactionTime", "desc"),
-  ];
-
-  if (props) {
-    props.forEach((prop) => queryConstraints.push(prop));
-  }
+    ...props
+  );
 
   useEffect(() => {
-    const queryTransactions = query(
-      transactionsCollectionRef,
-      ...queryConstraints
-    );
-
-    let unsubscribe = onSnapshot(queryTransactions, (querySnapShot) => {
+    const unsubscribe = onSnapshot(querySnapShot, (querySnapshot) => {
       let queryData = [];
       let expense = 0;
       let income = 0;
-
-      querySnapShot.forEach((doc) => {
+      querySnapshot.forEach((doc) => {
         const data = doc.data();
         queryData.push({ ...data, id: doc.id });
 
@@ -58,7 +57,7 @@ export const useGetTransactions = (props) => {
     return () => {
       unsubscribe();
     };
-  }, [user]);
+  }, []);
 
   return { transactions, summary };
 };

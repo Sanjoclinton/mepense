@@ -3,6 +3,7 @@ import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
 import {
   collection,
+  doc,
   initializeFirestore,
   persistentLocalCache,
   persistentMultipleTabManager,
@@ -30,6 +31,8 @@ export const db = initializeFirestore(app, {
 });
 
 export const transactionsCollectionRef = collection(db, "transactions");
+
+
 // firebase login
 // firebase init
 // firebase deploy

@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { useAuthContext } from "../../contexts/AuthContext";
-import { db } from "../../config/firebase";
+import { useAuthContext } from "../contexts/AuthContext";
+import { db } from "../config/firebase";
 import { onSnapshot, doc } from "firebase/firestore";
 
 export const useGetUserSettings = () => {
   const [currency, setCurrency] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [loadingCurrency, setLoadingCurrency] = useState(true);
   const { user } = useAuthContext();
   const userId = user.uid;
@@ -14,7 +15,8 @@ export const useGetUserSettings = () => {
   useEffect(() => {
     const unsubscribe = onSnapshot(userSettingsDocRef, (doc) => {
       setCurrency(doc.data().currency);
-      localStorage.setItem("currency", doc.data().currency);
+      setPhoneNumber(doc.data().phoneNumber);
+
       setLoadingCurrency(false);
     });
 
@@ -23,5 +25,5 @@ export const useGetUserSettings = () => {
     };
   }, []);
 
-  return { currency, loadingCurrency };
+  return { currency, loadingCurrency, phoneNumber };
 };

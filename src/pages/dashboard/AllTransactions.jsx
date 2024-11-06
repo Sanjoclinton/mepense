@@ -1,17 +1,19 @@
 import React from "react";
-import { useGetTransactions } from "../../hooks/useGetTransactions";
 import { Link } from "react-router-dom";
 import { IoChevronBackSharp } from "react-icons/io5";
-import { db } from "../../config/firebase";
+import { db, auth } from "../../config/firebase";
 import { deleteDoc, doc } from "firebase/firestore";
-import { useSetCurrency } from "../../hooks/useSetCurrency";
+import { useGetUserTransactions } from "../../hooks/useGetUserTransactions";
+import { useSetUserCurrency } from "../../hooks/useSetUserCurrency";
 
 const AllTransactions = () => {
-  const { transactions } = useGetTransactions();
-  const { currency } = useSetCurrency();
+  // const { transactions } = useGetTransactions();
+  const { transactions } = useGetUserTransactions();
+  const { currency } = useSetUserCurrency();
+  const userId = auth.currentUser.uid;
 
   const handleDeleteTransaction = async (id) => {
-    const transactionDocRef = doc(db, "transactions", id);
+    const transactionDocRef = doc(db, "users", userId, "transactions", id);
     await deleteDoc(transactionDocRef);
   };
 

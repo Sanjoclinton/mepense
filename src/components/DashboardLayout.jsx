@@ -1,18 +1,19 @@
 import React, { useState } from "react";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import { useAuthContext } from "../contexts/AuthContext";
-import { useGetTransactions } from "../hooks/useGetTransactions";
+
 import { MdOutlineAccountBalanceWallet } from "react-icons/md";
 import { useLogoutUser } from "../hooks/useLogoutUser";
 import { IoIosArrowRoundDown, IoIosArrowRoundUp } from "react-icons/io";
-import { useSetCurrency } from "../hooks/useSetCurrency";
+import { useSetUserCurrency } from "../hooks/useSetUserCurrency";
+import { useGetUserTransactions } from "../hooks/useGetUserTransactions";
 
 const DashboardLayout = () => {
   const [profileToggle, setProfileToggle] = useState(false);
   const { user } = useAuthContext();
   const { logoutUser } = useLogoutUser();
-  const { summary } = useGetTransactions();
-  const { currency } = useSetCurrency();
+  const { summary } = useGetUserTransactions();
+  const { currency } = useSetUserCurrency();
 
   // Early return if summary is empty
   if (!summary.length) return null;
@@ -38,12 +39,15 @@ const DashboardLayout = () => {
         {/* Profile Dropdown */}
         {profileToggle && (
           <div className="absolute right-6 -bottom-20 px-5 py-4 min-w-44 bg-[#f0f1f3] text-sm shadow-black/20 shadow-md rounded-xl border text-left">
-            <p className="capitalize font-medium text-black/60">
-              {user.displayName}
-            </p>
+            <Link to="/settings">
+              <p className="capitalize font-medium text-black/60 cursor-pointer">
+                {user.displayName}
+              </p>
+            </Link>
+
             <button
               onClick={logoutUser}
-              className="text-white bg-red-600 font-bold mt-4 border rounded-md py-1 px-3 hover:bg-red-700 transition-colors duration-200"
+              className=" bg-slate-200 font-bold mt-4 border rounded-md py-1 px-3 hover:bg-slate-300 transition-colors duration-200"
             >
               Logout
             </button>

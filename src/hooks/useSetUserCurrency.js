@@ -1,8 +1,8 @@
 import { useCallback, useEffect } from "react";
 import { useGetUserSettings } from "./useGetUserSettings";
-import { doc, setDoc } from "firebase/firestore";
-import { db } from "../../config/firebase";
-import { useAuthContext } from "../../contexts/AuthContext";
+import { doc, setDoc, updateDoc } from "firebase/firestore";
+import { db } from "../config/firebase";
+import { useAuthContext } from "../contexts/AuthContext";
 
 export const useSetUserCurrency = () => {
   const { currency, loadingCurrency } = useGetUserSettings();
