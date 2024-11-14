@@ -26,6 +26,14 @@ import PasswordChange from "./pages/PasswordChange";
 import EditProfile, { action as editAction } from "./pages/EditProfile";
 import { AuthProvider } from "./contexts/AuthContext";
 
+// import { Cloudinary } from "@cloudinary/url-gen";
+// import { AdvancedImage } from "@cloudinary/react";
+
+// const cld = new Cloudinary({
+//   cloud: {
+//     cloudName: "dpbbc9zyd",
+//   },
+// });
 
 const App = () => {
   

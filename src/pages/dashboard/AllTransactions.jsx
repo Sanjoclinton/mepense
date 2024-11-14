@@ -4,12 +4,12 @@ import { IoChevronBackSharp } from "react-icons/io5";
 import { db, auth } from "../../config/firebase";
 import { deleteDoc, doc } from "firebase/firestore";
 import { useGetUserTransactions } from "../../hooks/useGetUserTransactions";
-import { useSetUserCurrency } from "../../hooks/useSetUserCurrency";
+import { useGetUserSettings } from "../../hooks/useGetUserSettings";
 
 const AllTransactions = () => {
   // const { transactions } = useGetTransactions();
   const { transactions } = useGetUserTransactions();
-  const { currency } = useSetUserCurrency();
+  const { currency } = useGetUserSettings();
   const userId = auth.currentUser.uid;
 
   const handleDeleteTransaction = async (id) => {
