@@ -1,22 +1,48 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useAuthContext } from "../contexts/AuthContext";
 import { db } from "../config/firebase";
-import { onSnapshot, doc } from "firebase/firestore";
+import { onSnapshot, doc, setDoc } from "firebase/firestore";
 
 export const useGetUserSettings = () => {
   const [currency, setCurrency] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [loadingCurrency, setLoadingCurrency] = useState(true);
+  const [imageUrl, setImageUrl] = useState();
   const { user } = useAuthContext();
   const userId = user.uid;
 
   const userSettingsDocRef = doc(db, "users", userId, "settings", "main");
 
+  const setDefaultCurrency = async (prop) => {
+    try {
+      await setDoc(
+        userSettingsDocRef,
+        {
+          currency: prop,
+        },
+        { merge: true }
+      );
+      setIsDefaultSet(true);
+    } catch (error) {
+      console.log(error.code);
+    }
+  };
+
+  const handleOnchange = useCallback((e) => {
+    const newCurrency = e.target.value;
+    setDefaultCurrency(newCurrency);
+  }, []);
+
   useEffect(() => {
     const unsubscribe = onSnapshot(userSettingsDocRef, (doc) => {
-      setCurrency(doc.data().currency);
-      setPhoneNumber(doc.data().phoneNumber);
-
+      if (doc.data()?.currency) {
+        setCurrency(doc.data()?.currency);
+      } else {
+        setDefaultCurrency("₦");
+        setCurrency("₦");
+      }
+      setPhoneNumber(doc.data()?.phoneNumber);
+      setImageUrl(doc.data()?.imageUrl);
       setLoadingCurrency(false);
     });
 
@@ -25,5 +51,5 @@ export const useGetUserSettings = () => {
     };
   }, []);
 
-  return { currency, loadingCurrency, phoneNumber };
+  return { currency, loadingCurrency, phoneNumber, imageUrl, handleOnchange };
 };

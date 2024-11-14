@@ -5,15 +5,14 @@ import { useAuthContext } from "../contexts/AuthContext";
 import { Wallet } from 'lucide-react';
 import { useLogoutUser } from "../hooks/useLogoutUser";
 import { IoIosArrowRoundDown, IoIosArrowRoundUp } from "react-icons/io";
-import { useSetUserCurrency } from "../hooks/useSetUserCurrency";
 import { useGetUserTransactions } from "../hooks/useGetUserTransactions";
-
+import {useGetUserSettings} from "../hooks/useGetUserSettings.js"
 const DashboardLayout = () => {
   const [profileToggle, setProfileToggle] = useState(false);
   const { user } = useAuthContext();
   const { logoutUser } = useLogoutUser();
   const { summary } = useGetUserTransactions();
-  const { currency } = useSetUserCurrency();
+const {currency, imageUrl} = useGetUserSettings();
 
   // Early return if summary is empty
   if (!summary.length) return null;
@@ -30,7 +29,7 @@ const DashboardLayout = () => {
           className="focus:outline-none"
         >
           <img
-            src={user.photoURL || "/profile.png"}
+            src={imageUrl || "/profile.png"}
             alt="Profile"
             className="h-10 w-10 rounded-full"
           />
@@ -83,14 +82,14 @@ const DashboardLayout = () => {
 
               <h2 className="font-bold text-xl mt-2">
                 {item.amount < 0
-                  ? `-${currency}${Math.abs(item.amount).toLocaleString(
+                  ? `-${ currency}${Math.abs(item.amount).toLocaleString(
                       "default",
                       {
                         minimumFractionDigits: 2,
                         maximumFractionDigits: 2,
                       }
                     )}`
-                  : `${currency}${item.amount.toLocaleString("default", {
+                  : `${ currency}${item.amount.toLocaleString("default", {
                       minimumFractionDigits: 2,
                       maximumFractionDigits: 2,
                     })}`}

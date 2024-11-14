@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { IoChevronBackSharp } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { Link, useNavigation } from "react-router-dom";
 import { FaCheckCircle, FaUserEdit } from "react-icons/fa";
 import {
   MdDeleteForever,
@@ -14,20 +14,34 @@ import { BsCurrencyExchange, BsEye, BsEyeSlash } from "react-icons/bs";
 import { useAuthContext } from "../contexts/AuthContext";
 import { useLogoutUser } from "../hooks/useLogoutUser";
 import { IoClose } from "react-icons/io5";
-import { useSetUserCurrency } from "../hooks/useSetUserCurrency";
+import { useGetUserSettings } from "../hooks/useGetUserSettings";
 import { useDeleteUserAccount } from "../hooks/useDeleteUserAccount";
+import { sendEmailVerification } from "firebase/auth";
+import { auth } from "../config/firebase";
+
 
 export const Settings = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [showDeletePopUp, setShowDeletePopUp] = useState(false);
   const [password, setPassword] = useState("");
+  const [VerificationStatus, setVerificationStatus] = useState({
+    sent: false,
+    success: false,
+    message: "",
+  });
+
   const [deleteErrorMessage, setDeleteErrorMessage] = useState("");
   const [showVerificationAlert, setShowVerificationAlert] = useState(false);
 
   const { deleteUserAccount } = useDeleteUserAccount();
   const { logoutUser } = useLogoutUser();
   const { user } = useAuthContext();
-  const { currency, handleOnchange } = useSetUserCurrency();
+
+  const {imageUrl} = useGetUserSettings();
+
+  const navigation = useNavigation();
+
+  const { currency, handleOnchange } = useGetUserSettings();
 
   const toggleDeleteTop = () => {
     setShowDeletePopUp((prev) => !prev);
@@ -48,6 +62,26 @@ export const Settings = () => {
     }
   };
 
+  const handleSendVerificationMail = async () => {
+    try {
+      await sendEmailVerification(auth.currentUser);
+
+      const result = {
+        sent: true,
+        success: true,
+        message: "A verification link been sent to your email",
+      };
+      setVerificationStatus(result);
+    } catch (error) {
+      const result = {
+        sent: true,
+        success: false,
+        message: error.code,
+      };
+      setVerificationStatus(result);
+    }
+  };
+
   return (
     <div className="settings-container layout-outlet-custom-height bg-white relative">
       <div className="px-6 py-4 flex items-center justify-between bg-white h-[88px]">
@@ -61,21 +95,42 @@ export const Settings = () => {
       </div>
       <div className="settings-scrollable">
         {/* Profile goes in here */}
+        {VerificationStatus.sent && (
+          <div
+            className={`my-5 w-full rounded-lg gap-2 py-3 px-4 flex items-center justify-start text-xs 
+          ${
+            !VerificationStatus.success
+              ? "bg-[#ffd7d7] text-[#ef4e4e]"
+              : "bg-green-200 text-green-600"
+          }`}
+          >
+            <MdOutlineError size={20} />
+            <p>{VerificationStatus.message}</p>
+          </div>
+        )}
         <div className="flex flex-col items-center justify-center sm:flex-row gap-3">
           <img
-            src={user.photoURL || "/profile.png"}
+            src={imageUrl || "/profile.png"}
             alt="profile picture"
-            className="h-16 w-16 rounded-full border border-slate-600"
+            className="h-16 w-16 rounded-full border border-slate-400"
           />
           <div className="text-center sm:text-start">
-            <h3 className="font-bold sm:text-lg">{user.displayName}</h3>
+            <h3 className="font-bold sm:text-lg capitalize">
+              {user.displayName}
+            </h3>
             {user.emailVerified ? (
               <div className="flex justify-center sm:justify-start items-center mt-2">
                 <p className="opacity-70 text-sm">Verified</p>
                 <FaCheckCircle size={12} className="ms-1 text-blue-600" />
               </div>
             ) : (
-              <button className="hover:underline">Verify Email</button>
+              <button
+                className="hover:underline my-2"
+                onClick={handleSendVerificationMail}
+                disabled={navigation.state === "submitting"}
+              >
+                Verify Email
+              </button>
             )}
           </div>
         </div>

@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useSetUserCurrency } from "../hooks/useSetUserCurrency";
+import { useGetUserSettings } from "../hooks/useGetUserSettings";
 
 const Transactions = ({ transactions, title }) => {
-  const { currency } = useSetUserCurrency();
+  const { currency } = useGetUserSettings();
 
   return (
     <section className="flex flex-col h-full">

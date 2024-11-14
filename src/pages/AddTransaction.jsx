@@ -3,10 +3,10 @@ import { IoChevronBackSharp } from "react-icons/io5";
 import { Form, Link, useActionData, useNavigation } from "react-router-dom";
 import { useAuthContext } from "../contexts/AuthContext";
 
-import { transactionsCollectionRef, db, auth } from "../config/firebase";
+import { db, auth } from "../config/firebase";
 import { MdOutlineError } from "react-icons/md";
 import { useRef } from "react";
-import { useSetUserCurrency } from "../hooks/useSetUserCurrency";
+import { useGetUserSettings } from "../hooks/useGetUserSettings";
 
 export const action = async ({ request }) => {
   const formData = await request.formData();
@@ -58,7 +58,6 @@ export const action = async ({ request }) => {
 
     return { success: "Transaction has been added successfully" };
   } catch (error) {
-    console.error("Error adding transaction:", error);
     return {
       error: "Failed to add transaction. Please try again later.",
     };
@@ -71,7 +70,7 @@ const AddTransaction = () => {
   const message = useActionData();
   const navigation = useNavigation();
 
-  const { currency } = useSetUserCurrency();
+  const { currency } = useGetUserSettings();
 
   if (message) {
     formRef.current.reset();
