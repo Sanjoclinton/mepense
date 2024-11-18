@@ -23,14 +23,23 @@ const Layout = () => {
       token: token,
     });
   };
+
+  const isSupported = () =>
+    "Notification" in window &&
+    "serviceWorker" in navigator &&
+    "PushManager" in window;
+
   let permissionStatus;
   useEffect(() => {
     // Check if notification is on
     // If granted send the token to my data base.
-    permissionStatus = Notification.permission;
-    if (permissionStatus === "granted") {
-      saveToken();
+    if (isSupported) {
+      permissionStatus = Notification.permission;
+      if (permissionStatus === "granted") {
+        saveToken();
+      }
     }
+
     // Foreground message
     onMessage(messaging, (payload) => {
       setNotification(payload.notification);

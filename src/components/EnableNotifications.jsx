@@ -25,20 +25,29 @@ const EnableNotifications = () => {
     );
   };
 
+  const isSupported = () =>
+    "Notification" in window &&
+    "serviceWorker" in navigator &&
+    "PushManager" in window;
+
   //   Request Permission function
   const reqeustPermission = async () => {
-    const permission = await Notification.requestPermission();
-    if (permission === "granted") {
-      getAndSaveToken();
-      setNotisOn(true);
+    if (isSupported) {
+      const permission = await Notification.requestPermission();
+      if (permission === "granted") {
+        getAndSaveToken();
+        setNotisOn(true);
+      }
     }
   };
 
   useEffect(() => {
-    if (Notification.permission === "granted") {
-      setNotisOn(true);
-    } else {
-      setNotisOn(false);
+    if (isSupported) {
+      if (Notification.permission === "granted") {
+        setNotisOn(true);
+      } else {
+        setNotisOn(false);
+      }
     }
   }, []);
 
