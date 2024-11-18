@@ -19,9 +19,6 @@ const EnableNotifications = () => {
       {
         token: token,
       },
-      {
-        merge: true,
-      }
     );
   };
 
