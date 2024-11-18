@@ -25,9 +25,6 @@ import { Error404 } from "./pages/Error404";
 import PasswordChange from "./pages/PasswordChange";
 import EditProfile, { action as editAction } from "./pages/EditProfile";
 import { AuthProvider } from "./contexts/AuthContext";
-import { collection, getDocs, onSnapshot } from "firebase/firestore";
-import { db } from "./config/firebase";
-import { useEffect } from "react";
 import AdminPage from "./pages/AdminPage";
 import AdminIndexPage from "./pages/AdminIndexPage";
 

@@ -14,22 +14,14 @@ const EnableNotifications = () => {
   // The save token page uses the getToken function to save to my db
   const getAndSaveToken = async () => {
     const token = await generateToken();
-    await setDoc(
-      tokenDocRef,
-      {
-        token: token,
-      },
-    );
+    await setDoc(tokenDocRef, {
+      token: token,
+    });
   };
-
-  const isSupported = () =>
-    "Notification" in window &&
-    "serviceWorker" in navigator &&
-    "PushManager" in window;
 
   //   Request Permission function
   const reqeustPermission = async () => {
-    if (isSupported) {
+    if ("Notification" in window) {
       const permission = await Notification.requestPermission();
       if (permission === "granted") {
         getAndSaveToken();
@@ -39,7 +31,7 @@ const EnableNotifications = () => {
   };
 
   useEffect(() => {
-    if (isSupported) {
+    if ("Notification" in window) {
       if (Notification.permission === "granted") {
         setNotisOn(true);
       } else {

@@ -24,16 +24,13 @@ const Layout = () => {
     });
   };
 
-  const isSupported = () =>
-    "Notification" in window &&
-    "serviceWorker" in navigator &&
-    "PushManager" in window;
+
 
   let permissionStatus;
   useEffect(() => {
     // Check if notification is on
     // If granted send the token to my data base.
-    if (isSupported) {
+    if ("Notification" in window) {
       permissionStatus = Notification.permission;
       if (permissionStatus === "granted") {
         saveToken();
