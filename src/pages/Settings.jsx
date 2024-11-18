@@ -18,7 +18,7 @@ import { useGetUserSettings } from "../hooks/useGetUserSettings";
 import { useDeleteUserAccount } from "../hooks/useDeleteUserAccount";
 import { sendEmailVerification } from "firebase/auth";
 import { auth } from "../config/firebase";
-
+import EnableNotifications from "../components/EnableNotifications";
 
 export const Settings = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -37,7 +37,7 @@ export const Settings = () => {
   const { logoutUser } = useLogoutUser();
   const { user } = useAuthContext();
 
-  const {imageUrl} = useGetUserSettings();
+  const { imageUrl } = useGetUserSettings();
 
   const navigation = useNavigation();
 
@@ -179,14 +179,8 @@ export const Settings = () => {
             </select>
           </div>
 
-          {/* Terms and Conditions */}
-          <div className="flex items-center justify-between [&&>div>svg]:hover:text-blue-600">
-            <div className="flex items-center gap-5">
-              <MdOutlinePolicy size={20} className="text-slate-500" />
-              <p>Terms of Service</p>
-            </div>
-            <MdKeyboardArrowRight size={25} className="text-slate-500" />
-          </div>
+          {/* Push Notifications */}
+          <EnableNotifications />
 
           {/* Change Password */}
           <Link to="change-password">

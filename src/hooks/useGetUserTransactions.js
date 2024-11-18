@@ -11,7 +11,6 @@ export const useGetUserTransactions = (props = []) => {
   ]);
 
   const [transactions, setTransactions] = useState([]);
-  const [transactionsLoading, setTransactionsLoading] = useState(true)
   const { user } = useAuthContext();
   const userId = user.uid;
 

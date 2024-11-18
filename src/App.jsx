@@ -25,18 +25,13 @@ import { Error404 } from "./pages/Error404";
 import PasswordChange from "./pages/PasswordChange";
 import EditProfile, { action as editAction } from "./pages/EditProfile";
 import { AuthProvider } from "./contexts/AuthContext";
-
-// import { Cloudinary } from "@cloudinary/url-gen";
-// import { AdvancedImage } from "@cloudinary/react";
-
-// const cld = new Cloudinary({
-//   cloud: {
-//     cloudName: "dpbbc9zyd",
-//   },
-// });
+import { collection, getDocs, onSnapshot } from "firebase/firestore";
+import { db } from "./config/firebase";
+import { useEffect } from "react";
+import AdminPage from "./pages/AdminPage";
+import AdminIndexPage from "./pages/AdminIndexPage";
 
 const App = () => {
-  
   const router = createBrowserRouter(
     createRoutesFromElements(
       <>
@@ -46,6 +41,9 @@ const App = () => {
           <Route path="signup" element={<SignupPage />} action={signupAction} />
           <Route path="reset-password" element={<PasswordReset />} />
 
+          <Route element={<AdminPage />}>
+            <Route path="admin" element={<AdminIndexPage />} />
+          </Route>
           <Route element={<ProtectPages />}>
             <Route element={<Layout />}>
               <Route path="dashboard" element={<DashboardLayout />}>
@@ -69,8 +67,6 @@ const App = () => {
                 />
               </Route>
             </Route>
-
-            {/* <Route path="dashboard" element={<Dashboard />} /> */}
           </Route>
 
           <Route path="*" element={<Error404 />} />

@@ -10,11 +10,8 @@ const RefreshServiceWorker = () => {
   } = useRegisterSW({
     onRegistered(r) {
       // eslint-disable-next-line prefer-template
-      console.log("SW Registered: " + r);
     },
-    onRegisterError(error) {
-      console.log("SW registration error", error);
-    },
+    onRegisterError(error) {},
   });
 
   const close = () => {
@@ -31,15 +28,14 @@ const RefreshServiceWorker = () => {
               A new version is now available
             </p>
             <div className="flex gap-3">
-              
-                <button
-                  aria-label="Reload Page"
-                  onClick={() => updateServiceWorker(true)}
-                  className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-white bg-blue-500 rounded-md hover:bg-blue-600 transition-colors duration-200"
-                >
-                  <RefreshCw className="w-4 h-4" />
-                  Update
-                </button>
+              <button
+                aria-label="Reload Page"
+                onClick={() => updateServiceWorker(true)}
+                className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-white bg-blue-500 rounded-md hover:bg-blue-600 transition-colors duration-200"
+              >
+                <RefreshCw className="w-4 h-4" />
+                Update
+              </button>
               <button
                 aria-label="Dismiss update"
                 onClick={() => close()}

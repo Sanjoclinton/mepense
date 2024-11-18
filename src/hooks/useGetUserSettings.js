@@ -22,9 +22,9 @@ export const useGetUserSettings = () => {
         },
         { merge: true }
       );
-      setIsDefaultSet(true);
     } catch (error) {
-      console.log(error.code);
+      console.log("Not setting working")
+      console.log(error);
     }
   };
 

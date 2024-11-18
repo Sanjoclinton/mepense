@@ -1,13 +1,16 @@
 import { initializeApp } from "firebase/app";
 
-import { getAuth, GoogleAuthProvider } from "firebase/auth";
+import { getAuth, GoogleAuthProvider, onAuthStateChanged } from "firebase/auth";
 import {
   collection,
   doc,
   initializeFirestore,
   persistentLocalCache,
   persistentMultipleTabManager,
+  setDoc,
 } from "firebase/firestore";
+
+import { getMessaging, getToken } from "firebase/messaging";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -22,6 +25,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 
+
 export const googleProvider = new GoogleAuthProvider();
 
 export const db = initializeFirestore(app, {
@@ -32,6 +36,24 @@ export const db = initializeFirestore(app, {
 
 export const transactionsCollectionRef = collection(db, "transactions");
 
+// FCM
+export const messaging = getMessaging(app);
+export const PUBLIC_VAPID_KEY = import.meta.env.VITE_FIREBASE_VAPID_KEY;
+
+export const generateToken = async () => {
+  try {
+    const currentToken = await getToken(messaging, {
+      vapidKey: PUBLIC_VAPID_KEY,
+    });
+    if (currentToken) {
+      return currentToken;
+    }
+    return null;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
 
 // firebase login
 // firebase init

@@ -11,6 +11,10 @@ export default defineConfig({
       workbox: {
         globPatterns: ["**/*.{js,css,html,ico,png,svg}"],
       },
+      // strategies: "injectManifest",
+      // srcDir: "public",
+      // filename: "firebase-messaging-sw.js",
+
       manifest: {
         id: "/",
         start_url: "/dashboard",
