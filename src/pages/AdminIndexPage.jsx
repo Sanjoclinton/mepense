@@ -35,7 +35,6 @@ const AdminIndexPage = () => {
             <li className="break-words">
               <span className="font-semibold">Token :</span> {token.token}
             </li>
-            ;
           </ul>
         ))}
       </div>
